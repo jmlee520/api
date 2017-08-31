@@ -23,8 +23,8 @@ module.exports = {
           model: 'posts',
           key: 'id'
         },
-        onUpdate:'CAASCADE',
-        onDelete: 'CAASCADE',
+        onUpdate:'CASCADE',
+        onDelete: 'CASCADE',
         allowNull:false,
         unique:true
       },

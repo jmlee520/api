@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var user = sequelize.define('user', {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -10,15 +10,10 @@ module.exports = function(sequelize, DataTypes) {
     isBusiness: DataTypes.BOOLEAN,
     allowance: DataTypes.INTEGER
   });
-
   user.associate = function (models) {
-    // associations can be defined here
-        user.hasMany(models.post,{onDelete: 'CASCADE',onUpdate:'CASCADE'});
-        user.hasMany(models.comment,{onDelete: 'CASCADE',onUpdate:'CASCADE'});
-        user.hasOne(models.business,{onDelete: 'CASCADE',onUpdate:'CASCADE'});
-    };
-    
+    user.hasMany(models.post, { onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+    user.hasMany(models.comment, { onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+    user.hasOne(models.business, { onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+  };
   return user;
 };
-
-

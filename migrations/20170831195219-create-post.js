@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  up: function(queryInterface, Sequelize) {
+  up: function (queryInterface, Sequelize) {
     return queryInterface.createTable('posts', {
       id: {
         allowNull: false,
@@ -10,25 +10,28 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        references:{
-          model:'users',
-          key:'id'
+        references: {
+          model: 'users',
+          key: 'id'
         },
-        onUpdate:'CAASCADE',
-        onDelete: 'CAASCADE',
-        allowNull:false,
-        unique:false
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false,
+        unique: false
       },
       businessId: {
         type: Sequelize.INTEGER,
-        references:{
-          model:'businesses',
-          key:'id'
+        references: {
+          model: 'businesses',
+          key: 'id'
         },
-        onUpdate:'CAASCADE',
-        onDelete: 'CAASCADE',
-        allowNull:true,
-        unique:true
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: true,
+        unique: true
+      },
+      region: {
+        type: Sequelize.STRING
       },
       availability: {
         type: Sequelize.BOOLEAN
@@ -163,7 +166,7 @@ module.exports = {
       }
     });
   },
-  down: function(queryInterface, Sequelize) {
+  down: function (queryInterface, Sequelize) {
     return queryInterface.dropTable('posts');
   }
 };

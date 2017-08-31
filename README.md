@@ -23,7 +23,8 @@ sequelize-cli
 //hold for creating region table
 - sequelize model:create --name region --attributes name:string
 
-Association
+Association 
+- model files
     user
 
     user.associate = function (models) {
@@ -87,6 +88,71 @@ module.exports = function(sequelize, DataTypes) {
   };
   return nameofmodel;
 };
+
+- migration files
+  add references to theses fields
+
+  business
+
+      userId: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'users',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        allowNull:false,
+        unique: true
+      }
+
+  post
+
+      userId: {
+        type: Sequelize.INTEGER,
+        references:{
+          model:'users',
+          key:'id'
+        },
+        onUpdate:'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull:false,
+        unique:false
+      },
+      businessId: {
+        type: Sequelize.INTEGER,
+        references:{
+          model:'businesses',
+          key:'id'
+        },
+        onUpdate:'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull:true,
+        unique:true
+      },
+  
+  comment
+
+      userId: {
+        type: Sequelize.INTEGER,
+        references:{
+          model:'users',
+          key: 'id'
+        },
+        allowNull:false,
+        unique:false
+      },
+      postId: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'posts',
+          key: 'id'
+        },
+        onUpdate:'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull:false,
+        unique:true
+      },
 
 
 In migration file

@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "dkssud",
-    "database": "espn",
-    "host": "127.0.0.1",
+    "username": "isqhxiziwzrxgl",
+    "password": "69a19de17d7e30f1fa518c88ae425333b268dc06d6da8dd8423dec1916e176b1",
+    "database": "dcch20lk6lqgko",
+    "host": "ec2-107-22-167-179.compute-1.amazonaws.com",
     "dialect": "postgres"
   },
   "test": {

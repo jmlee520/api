@@ -1,8 +1,9 @@
 'use strict';
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var post = sequelize.define('post', {
     userId: DataTypes.INTEGER,
     businessId: DataTypes.INTEGER,
+    region: DataTypes.STRING,
     availability: DataTypes.BOOLEAN,
     available_from: DataTypes.DATEONLY,
     available_to: DataTypes.DATEONLY,
@@ -45,13 +46,10 @@ module.exports = function(sequelize, DataTypes) {
     loca_amenities: DataTypes.STRING,
     pictures: DataTypes.JSON
   });
-
   post.associate = function (models) {
-    post.belongsTo(models.user,{onDelete: 'NOACTION',onUpdate:'CASCADE'});
-    post.belongsTo(models.business,{onDelete: 'SETNULL',onUpdate:'CASCADE'});
-    post.hasMany(models.comment,{onDelete: 'CASCADE',onUpdate:'CASCADE'});
-};
-
-
+    post.belongsTo(models.user, { onDelete: 'NOACTION', onUpdate: 'CASCADE' });
+    post.belongsTo(models.business, { onDelete: 'SETNULL', onUpdate: 'CASCADE' });
+    post.hasMany(models.comment, { onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+  };
   return post;
 };
