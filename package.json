@@ -1,0 +1,29 @@
+{
+  "name": "espn",
+  "version": "1.0.0",
+  "description": "express sequelize postgresql nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "jsonwebtoken": "^7.4.3",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.2.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.7.5"
+  },
+  "devDependencies": {
+    "bluebird": "^3.5.0",
+    "faker": "^4.1.0",
+    "sequelize-cli": "^2.8.0",
+    "volleyball": "^1.4.1"
+  }
+}
