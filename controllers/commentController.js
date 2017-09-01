@@ -5,13 +5,13 @@ const JWT = require('jsonwebtoken'),
 
 //Dev
 const faker = require('faker');
-
+/*
 userId: DataTypes.INTEGER,
 postId: DataTypes.INTEGER,
 comment: DataTypes.TEXT,
 report: DataTypes.INTEGER,
 likes: DataTypes.INTEGER
-
+*/
 
 module.exports = {
     createComment: (req, res) => {

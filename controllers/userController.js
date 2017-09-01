@@ -30,7 +30,8 @@ module.exports = {
             user.create({
                 
                
-                email: faker.internet.email(), 
+                //email: faker.internet.email(), 
+                email: req.body.email, 
                 password: hash,
                 ip: faker.internet.ip(),
                 phone:faker.phone.phoneNumber(),

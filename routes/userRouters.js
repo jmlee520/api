@@ -13,7 +13,8 @@ router.route('/signup')
 
 router.route('/signin')
     .post(passportSignIn,UserController.signIn);
-    
+
+    //this can be done from client by deleteing token
 router.route('/signout')
         .post(UserController.signOut);
 
