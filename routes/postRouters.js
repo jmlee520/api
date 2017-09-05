@@ -3,21 +3,22 @@ const   router          = require('express').Router(),
         passportConfig  = require('../config/passportConfig'),
         PostController  = require('../controllers/postController');
 
-        const   passportSignIn  = passport.authenticate('local',{session:false}),
-        passportJWT     = passport.authenticate('jwt',{session:false});
-// // Routes
+const   passportJWT     = passport.authenticate('jwt',{session:false, failureRedirect: '/users/test' });//TODO - handle redirect
 
-// // search/read post /search/:page or /search?search=cityName&page=1
+
+// Routes
+
+// search/read post /search/:page or /search?search=cityName&page=1
  router.route('/search').get(PostController.search);
  
+//post a new room
+router.route('/new').post(passportJWT,PostController.createPost);
 
-// //post room
- //router.route('/new').post(passportJWT,PostController.createPost);
-router.route('/new').post(PostController.createPost);//test purpose
-        
-router.route('/:id').put(PostController.editPost);
+//edit a room
+router.route('/:id').put(passportJWT,PostController.editPost);
 
-router.route('/:id').delete(PostController.deletePost);
+//delete a room
+router.route('/:id').delete(passportJWT,PostController.deletePost);
 
 
 

@@ -26,7 +26,7 @@ module.exports = {
         onUpdate:'CASCADE',
         onDelete: 'CASCADE',
         allowNull:false,
-        unique:true
+        unique:false
       },
       comment: {
         type: Sequelize.TEXT

@@ -16,41 +16,50 @@ likes: DataTypes.INTEGER
 module.exports = {
     createComment: (req, res) => {
 
-
         comment.create({
-            //username: faker.internet.userName(),
-            username: req.body.username,
-            firstname: faker.name.firstName(),
-            lastname: faker.name.lastName(),
-            email: faker.internet.email(),
-            password: hash,
-            ip: faker.internet.ip(),
-            allowance: faker.random.number(),
-            upload: faker.random.number(),
+
+            userId: req.user.id,
+            postId: req.params.postid,
+            comment: faker.lorem.text(),
+            report: faker.random.number(),
+            likes: faker.random.number(),
             createdAt: faker.date.recent(),
             updatedAt: faker.date.recent()
-        }).then(function (user) {
+        }).then(function (newComment) {
 
-            const token = assignToken(user);
-            //response token
-            res.status(200).json({ token });  // es6 style - same as {token:token}
+            res.json(newComment);
+            //res.redirect('/comments/'+newComment.postId); // TODO - how to redirect client from here to refresh to view new comments
 
         }).catch(function (error) {
 
-            res.send('error');
+            res.send('database error');
 
         });
 
 
     },
     readComment: (req, res) => {
+      
+            comment.findAll({ where: { postId: req.params.postid } }).then(posts => { res.json(posts) });
 
     },
-    editComment: (req, res) => {
+    updateComment: (req, res) => {
+        comment.update({
+            userId: req.user.id,
+            postId: req.params.postid,
+            comment: faker.lorem.text,
+            report: faker.random.number(),
+            likes: faker.random.number(),
+            createdAt: faker.date.recent(),
+            updatedAt: faker.date.recent()
+        }).then(function(editedComment){
 
+        }).catch(function(error){
+
+        });
     },
     deleteComment: (req, res) => {
-
+        comment.destroy({where:{userId:req.params.id},cascade:true});
     }
 
 };

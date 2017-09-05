@@ -17,9 +17,9 @@ const   volleyball  = require('volleyball');//server logger
 
 //Import Routes
 const   userRouters = require('./routes/userRouters')
-        //adminRouters = require('./routes/adminRouters'),
-        //commentRouters = require('./routes/commentRouters'),
+        commentRouters = require('./routes/commentRouters'),
         postRouters = require('./routes/postRouters');
+        //adminRouters = require('./routes/adminRouters'),
 
 
 
@@ -36,7 +36,7 @@ app.use(volleyball); //delete when production env
 //Routes
 app.use('/users', userRouters);
 app.use('/posts', postRouters);
-// app.use('/comments', commentRouters);
+app.use('/comments', commentRouters);
 // app.use('/admin', adminRouters);
 
 

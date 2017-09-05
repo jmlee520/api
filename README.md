@@ -166,6 +166,20 @@ queryInterface.addColumn(
   Sequelize.ARRAY(Sequelize.DECIMAL)
 )
 
+
+http://docs.sequelizejs.com/manual/tutorial/migrations.html
+To Update Column
+
+queryInterface.changeColumn(
+  'nameOfAnExistingTable',
+  'nameOfAnExistingAttribute',
+  {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    defaultValue: 0.0
+  }
+)
+
 Seed
 
 - sequelize seed:create --name nameOfSeed //this task is only necessary when seed is required

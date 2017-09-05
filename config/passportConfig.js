@@ -14,19 +14,21 @@ passport.use(new jwtStrategy({
 }, (payload, done)=>{
     try{
         
-        //find the user specified in token
-        const foundUser = user.findOne({where:{email:payload.sub}});
-           
-        //if user doesn't exist, handle it
-        if(!foundUser){
-            return done(null, false);
+        if(payload.exp < new Date().getTime()){
+           return done(null,{message:"token expired"});
         }
 
-        //otherwise, return the user
-        done(null, foundUser);
+        user.findOne({where:{id:payload.sub}})
+        .then(function(foundUser){
+            return done(null, foundUser);
+        }).catch(function (error) {
+      
+            return done(null, false);
 
-    }catch(error){
-        done(error,false);
+            });
+          
+     }catch(error){
+         done(error,false);
     }
 
 }));
@@ -39,7 +41,16 @@ passport.use(new LocalStrategy({
 }, (email, password, done)=>{
 
     // Find the user given the email
-    const foundUser = user.findOne({email});
+    user.findOne({where:{email:email}}).then(function(foundUser){
+        const isValid = isValidPassword(password,foundUser.password);
+         if(!isValid){
+        return done(null,false);
+        }
+    done(null,foundUser);
+    }).catch(function(error){
+return done(null,false);
+    });
+/*
     // If not, handle it
     if(!foundUser){
         return done(null,false);
@@ -51,4 +62,5 @@ passport.use(new LocalStrategy({
     }
     // Otherwise, return the user
     done(null,foundUser);
+    */
 }));

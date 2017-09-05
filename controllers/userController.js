@@ -10,7 +10,7 @@ const faker = require('faker');
 var assignToken = user => {
     return JWT.sign({
         iss: 'simplopers', // issuer
-        sub: user.email, // sub poiting User table id field
+        sub: user.id, // sub poiting User table id field
         iat: new Date().getTime(), // current time
         exp: new Date().setDate(new Date().getDate() + 1) // current time + 1 day
 
@@ -20,10 +20,21 @@ var assignToken = user => {
 //response token
 //res.status(200).json({token});// es6 style - same as {token:token}
 
+
+
 module.exports = {
+   
+   /*
+   * Register new user
+   * retrun token 
+   */
     signUp: (req, res) => {
 
-        
+/**bcrypt.hash
+ * 
+ * @param: password{string}, hash round{int}, callback(err,hash)
+ * @return: hashedPassword{string} : <promise>
+ */
         bcrypt.hash(req.body.password, 10, function (err, hash) {
             
 
@@ -45,7 +56,7 @@ module.exports = {
 
                 const token = assignToken(user);
                 //response token
-                res.status(200).json({ token });  // es6 style - same as {token:token}   
+                res.status(200).json({ token,id:user.id,phone:user.phone,firstname:user.firstname,lastname:user.lastname,isBusiness:user.isBusiness,allowance:user.allowance });  // es6 style - same as {token:token}   
 
             }).catch(function (error) {
 
@@ -58,10 +69,25 @@ module.exports = {
 
         //end of signup
     },
+    /**
+     * assign a token
+     */
     signIn: (req, res) => {
        //after user is verified assign a token
+
        const token = assignToken(req.user); //passport will send foundUser Object as user
-       res.status(200).json({ token });
+       res.status(200)
+       .json({  token,  
+                id: req.user.id,
+                email: req.user.email,
+                phone: req.user.phone,
+                firstname: req.user.firstname,
+                lastname: req.user.lastname,
+                isBusiness: req.user.isBusiness,
+                allowance: req.user.allowance
+            });//return user object also, for mobile and to display user info
+    
+    
     },
     signOut: (req, res)=>{
         res.send('signed out');
@@ -74,13 +100,22 @@ module.exports = {
             res.send(users); //res JSON
         });
         */
-
-
-        res.send('passed');
+            //req = JSON.stringify(req);
+        
+            res.json({id: req.user.id,
+                email: req.user.email,
+                phone: req.user.phone,
+                firstname: req.user.firstname,
+                lastname: req.user.lastname,
+                isBusiness: req.user.isBusiness,
+                allowance: req.user.allowance});
+        
         //res.send(User);
         //console.log(JSON.stringify(User()));
 
 
+    },
+    test: (req, res)=>{
+        res.send('please sign in');
     }
-
 };
