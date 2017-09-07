@@ -6,24 +6,24 @@ const   passport        = require('passport'),
         
         
 const   passportSignIn  = passport.authenticate('local',{session:false}),
-        passportJWT     = passport.authenticate('jwt',{session:false, failureRedirect: '/users/test' });
+        passportJWT     = passport.authenticate('jwt',{session:false});
 
 // ROUTES
+router.route('/signup').post(isUserExist,UserController.signUp); //TODO- check IP
 
-//signup
-router.route('/signup').post(isUserExist,UserController.signUp); 
-
-//signin
 router.route('/signin').post(passportSignIn,UserController.signIn);
+    
+router.route('/signout').post(UserController.signOut);//can be done from client by deleteting token
 
-//this can be done from client by deleteing token
-router.route('/signout').post(UserController.signOut);
+router.route('/resetpassword').get(UserController.resetPassword);
 
-//secret page after login, test purpose
-router.route('/secret').get(passportJWT,UserController.secret);
+router.route('/unregister').get(UserController.unregister);
 
-//testing
-router.route('/test').get(UserController.test);
+router.route('/profile').get(passportJWT,UserController.profile);
+
+//testing purpose
+router.route('/all').get(UserController.all);
 
 module.exports = router;
 
+//TODO - email verification, password reset

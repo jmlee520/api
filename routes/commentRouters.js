@@ -3,27 +3,28 @@
          passportConfig  = require('../config/passportConfig'),
          CommentController  = require('../controllers/commentController');
 
-const    passportJWT     = passport.authenticate('jwt',{session:false, failureRedirect: '/users/test' });
+const   passportJWT     = passport.authenticate('jwt',{session:false,failureRedirect: '/users/signin'});
 
- // Routes
-//read comments from a post(comments own by a post)
- router.route('/:postid').get(CommentController.readComment);
+// Routes
 
-//post comment to a post(:postid)
-//Todo - isLogedIn
- router.route('/:postid').post(passportJWT,CommentController.createComment);
+//create a comment
+router.route('/:postid').post(passportJWT,CommentController.createComment);
 
-//edit comment
-//Todo - verify owner        
- router.route('/:postid/:commentid/edit').put(passportJWT,CommentController.updateComment);
+//read comments, post page
+router.route('/post/:postid').get(CommentController.readComment);
 
-//delete comment
-//Todo - verify owner   
- router.route('/:postid/:commentid/delete').delete(passportJWT,CommentController.deleteComment);
+//read comments, business page
+//router.route('/business/:businessid').get(CommentController.readComment); //TODO
 
+//edit, post
+router.route('/:postid/:commentid/edit').put(passportJWT,CommentController.updateComment);
+
+//delete, post
+router.route('/:postid/:commentid/delete').delete(passportJWT,CommentController.deleteComment);
+
+//testing purpose
+router.route('/all').get(CommentController.all);
 
 
  module.exports = router;
 
-// Requirement
-// create comment, read comment, edit comment, delete comment

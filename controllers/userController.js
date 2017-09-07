@@ -20,28 +20,29 @@ var assignToken = user => {
 //response token
 //res.status(200).json({token});// es6 style - same as {token:token}
 
+var signoutToken = user => {
+    return JWT.sign({
+        iss: 'simplopers', // issuer
+        sub: user.id, // sub poiting User table id field
+        iat: new Date().getTime(), // current time
+        exp: new Date().setDate(new Date().getDate()) // current time
+
+    }, JWT_SECRET);
+ 
+}
+
 
 
 module.exports = {
-   
-   /*
-   * Register new user
-   * retrun token 
-   */
     signUp: (req, res) => {
 
-/**bcrypt.hash
- * 
- * @param: password{string}, hash round{int}, callback(err,hash)
- * @return: hashedPassword{string} : <promise>
- */
+        
         bcrypt.hash(req.body.password, 10, function (err, hash) {
             
 
             user.create({
                 
                
-                //email: faker.internet.email(), 
                 email: req.body.email, 
                 password: hash,
                 ip: faker.internet.ip(),
@@ -50,13 +51,13 @@ module.exports = {
                 lastname: faker.name.lastName(),
                 isBusiness:faker.random.boolean(),
                 allowance: faker.random.number(1),
-                createdAt: faker.date.recent(),
-                updatedAt: faker.date.recent()
+                createdAt: new Date().getTime(),
+                updatedAt: new Date().getTime()
             }).then(function (user) {
 
                 const token = assignToken(user);
                 //response token
-                res.status(200).json({ token,id:user.id,phone:user.phone,firstname:user.firstname,lastname:user.lastname,isBusiness:user.isBusiness,allowance:user.allowance });  // es6 style - same as {token:token}   
+                res.status(200).json({ token,userInfo:{email: user.email,phone:user.phone,firstName:user.firstname,lastName:user.lastname,allowance:user.allowance } });  // es6 style - same as {token:token}   
 
             }).catch(function (error) {
 
@@ -69,53 +70,40 @@ module.exports = {
 
         //end of signup
     },
-    /**
-     * assign a token
-     */
     signIn: (req, res) => {
        //after user is verified assign a token
-
        const token = assignToken(req.user); //passport will send foundUser Object as user
-       res.status(200)
-       .json({  token,  
-                id: req.user.id,
-                email: req.user.email,
-                phone: req.user.phone,
-                firstname: req.user.firstname,
-                lastname: req.user.lastname,
-                isBusiness: req.user.isBusiness,
-                allowance: req.user.allowance
-            });//return user object also, for mobile and to display user info
-    
-    
+       res.status(200).json({ token });
     },
     signOut: (req, res)=>{
         res.send('signed out');
     },
-    secret: (req, res) => {
-        //req.user
-        /*
-        user.findAll().then(users =>{
-            //res.send(JSON.stringify(users)); //res string
-            res.send(users); //res JSON
-        });
-        */
-            //req = JSON.stringify(req);
+    profile: (req, res) => {
+        //TODO - edit - can reset name,email,password, view - posted rooms (my rooms), favorites
+
+
+        res.send('this is your profile');
         
-            res.json({id: req.user.id,
-                email: req.user.email,
-                phone: req.user.phone,
-                firstname: req.user.firstname,
-                lastname: req.user.lastname,
-                isBusiness: req.user.isBusiness,
-                allowance: req.user.allowance});
-        
-        //res.send(User);
-        //console.log(JSON.stringify(User()));
+
+    },
+    profileUpdate: (req, res) => {
 
 
     },
-    test: (req, res)=>{
-        res.send('please sign in');
+    resetPassword: (req, res) => {
+        //TODO - search more on this, generate one time use url to reset password, 
+        //another method is generate random password and update it to user's password then 
+        //send via email then user can change password from profile eidt page
+    },
+    unregister: (req, res) => {
+        //TODO - find all comment by userid then delete all comment, find all records 
+        //from message then delete, the do same for posts, if business User delete record from business, finaly delete user
+        // Do not delete user right away, give some day then delete it. for record purpose, ADD disabled column for this purpose    
+    },
+    all:(req,res)=>{
+        user.findAll().then((users)=>{
+            res.json(users);
+        })
     }
+
 };

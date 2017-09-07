@@ -12,21 +12,19 @@ const   PORT        = env.PORT;
 const   volleyball  = require('volleyball');//server logger
 
 
-//Database
-
-
 //Import Routes
 const   userRouters = require('./routes/userRouters')
+        //adminRouters = require('./routes/adminRouters'),
         commentRouters = require('./routes/commentRouters'),
         postRouters = require('./routes/postRouters');
-        //adminRouters = require('./routes/adminRouters'),
+        messageRouters = require('./routes/messageRouters');
 
 
 
 // Middleware
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended: true})); //study more on this
-app.use(express.static(path.join(__dirname,'public')));
+//app.use(express.static(path.join(__dirname,'public')));
 
 
 // Middleware-dev
@@ -37,6 +35,7 @@ app.use(volleyball); //delete when production env
 app.use('/users', userRouters);
 app.use('/posts', postRouters);
 app.use('/comments', commentRouters);
+app.use('/messages',messageRouters);
 // app.use('/admin', adminRouters);
 
 

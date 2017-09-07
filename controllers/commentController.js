@@ -5,61 +5,44 @@ const JWT = require('jsonwebtoken'),
 
 //Dev
 const faker = require('faker');
-/*
-userId: DataTypes.INTEGER,
-postId: DataTypes.INTEGER,
-comment: DataTypes.TEXT,
-report: DataTypes.INTEGER,
-likes: DataTypes.INTEGER
-*/
+
 
 module.exports = {
     createComment: (req, res) => {
-
         comment.create({
-
-            userId: req.user.id,
-            postId: req.params.postid,
-            comment: faker.lorem.text(),
-            report: faker.random.number(),
-            likes: faker.random.number(),
-            createdAt: faker.date.recent(),
-            updatedAt: faker.date.recent()
-        }).then(function (newComment) {
-
-            res.json(newComment);
-            //res.redirect('/comments/'+newComment.postId); // TODO - how to redirect client from here to refresh to view new comments
-
+            userId: req.body.userId,
+            postId: req.body.postId,
+            comment: req.body.comment,
+            report: req.body.report,
+            likes: req.body.likes,
+            createdAt: new Date().getTime(),
+            updatedAt: new Date().getTime()
+        }).then(function (user) {
+            //assign a token
+            const token = assignToken(user);
+            //response token
+            res.status(200).json({ token });  // es6 style - same as {token:token}
         }).catch(function (error) {
-
-            res.send('database error');
+            res.status(500).send('Internal Server Error');
 
         });
 
 
     },
     readComment: (req, res) => {
-      
-            comment.findAll({ where: { postId: req.params.postid } }).then(posts => { res.json(posts) });
 
     },
     updateComment: (req, res) => {
-        comment.update({
-            userId: req.user.id,
-            postId: req.params.postid,
-            comment: faker.lorem.text,
-            report: faker.random.number(),
-            likes: faker.random.number(),
-            createdAt: faker.date.recent(),
-            updatedAt: faker.date.recent()
-        }).then(function(editedComment){
 
-        }).catch(function(error){
-
-        });
     },
     deleteComment: (req, res) => {
-        comment.destroy({where:{userId:req.params.id},cascade:true});
+
+    },
+    //testing purpose
+    all:(req,res)=>{
+        comment.findAll().then((comments)=>{
+            res.json(comments);
+        })
     }
 
 };

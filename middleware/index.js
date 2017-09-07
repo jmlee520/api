@@ -1,75 +1,69 @@
 const bcrypt = require('bcrypt'),
-{ user }        = require('../models');
+      {user} = require('../models')
 
-//create object
 var middlewareObj = {};
 
 /**
- * password validate password using bcrypt module
- * @param: password{string}, hashedPassword{string}
- * @return: user{json} : user object
+ * using bcrypt to verify password
+ * @param String password, String hashedPassword
+ * @return Boolean
  */
 middlewareObj.isValidPassword = (password, hashedPassword) => {
     try {
+
         return bcrypt.compare(password, hashedPassword);
     } catch (error) {
         throw new Error(error);
     }
+
 }
 
 /**
- * check email duplication
- * @param: Object req, Object res, callback function next
- * @return: boolean
+ * verify admin
+ * @param Obejct req, Object res, function next()
+ * @return promise<object>
  */
-middlewareObj.isUserExist = (req,res,next) => {
-user.find({where:{email:req.body.email}}).then(function(userExist){
-    if(userExist){
-
-    res.send("message: user already exist, TODO redirect to registration page");
-    }else{
-        next();
+middlewareObj.isAdmin = (req, res,next)=>{
+//TODO- need to fix
+user.find({where:{id:req.user.id}}).then((foundUser)=>{
+    if(foundUser.isAdmin){
+         next();
     }
+   
 }).catch((error)=>{
-     throw new Error('database error');
+
 });
 
 }
 
 /**
- * password validate password using bcrypt module
- * @param: password{string}, hashedPassword{string}
- * @return: user{json} : user object
+ * verify admin
+ * @param Obejct req, Object res, function next()
+ * @return promise<object>
  */
-middlewareObj.isAdmin = ()=>{
-
+middlewareObj.isUserExist = (req,res,next) => {
+    user.find({where:{email:req.body.email}}).then((userExist)=>{
+        if(userExist){
+            res.send("email already exist");
+        }else{
+            next();
+        }
+    }).catch((error)=>{
+        res.status(500).send('Internal Server Error');
+    })
 }
 
-/**
- * password validate password using bcrypt module
- * @param: password{string}, hashedPassword{string}
- * @return: user{json} : user object
- */
+
 middlewareObj.checkAllowance = ()=>{
 
 };
 
-/**
- * 
- * @param: 
- * @return: 
- */
 middlewareObj.isVerified = ()=>{
 
 };
 
-/**
- * 
- * @param: 
- * @return: 
- */
-middlewareObj.isOwnerOfComment = ()=>{
-
-};
+middlewareObj.isOwnerOfPost = (req,res,next)=>{
+    next();
+    };
 
 module.exports = middlewareObj;
