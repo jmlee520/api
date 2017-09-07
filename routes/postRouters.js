@@ -21,11 +21,11 @@ router.route('/new/uploadPhoto/:postid').post(isOwnerOfPost,PostController.uploa
 //TODO - resizing, reducing quality, and renaming of original image
 //TODO - thumbnail generation from client? then upload directly to s3? Or use aws lambda to create thumbnail(this may cause extra cost) 
 
-//search posts, region and page params are required
-router.route('/search/:region/:page').get(PostController.readPost);
-
 //detail page of a post
 router.route('/search/detail/:postid').get(PostController.readDetailPost);
+
+//search posts, region and page params are required
+router.route('/search/:region/:page').get(PostController.readPost);
 
 //update 
 router.route('/:postid').put(isOwnerOfPost,PostController.updatePost);//TODO - photo update, might require another route

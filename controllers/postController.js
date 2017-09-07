@@ -211,7 +211,7 @@ if(req.user.isBusiness){
 
         }).catch(function (error) {
 
-            res.status(500).send('Internal Server Error');
+            res.status(500).send('Internal Server Error'+error);
 
         });
     },
@@ -222,8 +222,13 @@ if(req.user.isBusiness){
         post.destroy({where:{userId:req.params.id},cascade:true});
     },
     readDetailPost: (req, res) => {
-        
+        post.findById(req.params.postid).then((post)=>{
+            res.status(200).json(post);
+        }).catch((error)=>{
+            res.status(500).send('Internal Server Error'+ error);
+        })
      },
+    //testing purpose
      all:(req,res)=>{
          post.findAll().then((posts)=>{
              res.json(posts);
