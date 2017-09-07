@@ -1,21 +1,20 @@
-// const   router          = require('express').Router();
-// const   passport        = require('passport'),
-//         passportConfig  = require('../config/passportConfig'),
-//         AdminController  = require('../controllers/adminController');
+const   router          = require('express').Router(),
+        passport        = require('passport'),
+        passportConfig  = require('../config/passportConfig'),
+        AdminController = require('../controllers/adminController');
 
 
-// // Routes
-// router.route('/search').get(AdminController);
+// Routes
+router.route('/dashboard').get(AdminController.dashboard);
 
-// router.route('/upload').post(AdminController);
-        
-// router.route('/:id/edit').put(AdminController);
+router.route('/users').get(AdminController.users);
 
-// router.route('/:id/delete').delete(AdminController);
+router.route('/posts').get(AdminController.posts);
+
+router.route('/comments').get(AdminController.comments);
+
+router.route('/messages').get(AdminController.messages);
+
+module.exports = router;
 
 
-
-// module.exports = router;
-
-// Super User
-// 

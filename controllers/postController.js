@@ -80,7 +80,6 @@ module.exports = {
           wheres = {};
           orders = [];
 
-
         })
         .catch(function (error) {
               res.status(500).send('Internal Server Error');

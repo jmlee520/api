@@ -1,5 +1,5 @@
 {
-  "name": "espn",
+  "name": "api",
   "version": "1.0.0",
   "description": "express sequelize postgresql nodejs",
   "main": "app.js",
@@ -7,7 +7,7 @@
     "start":"nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "simplopers",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.3",

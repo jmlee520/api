@@ -102,7 +102,7 @@ module.exports = {
     },
     all:(req,res)=>{
         user.findAll().then((users)=>{
-            res.json(users);
+            res.status(200).json(users);
         })
     }
 
