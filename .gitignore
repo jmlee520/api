@@ -3,3 +3,4 @@ seeders/
 migrations/
 backup/
 note.md
+herokuCredential.txt
