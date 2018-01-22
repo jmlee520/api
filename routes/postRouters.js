@@ -11,7 +11,7 @@ const   passportJWT     = passport.authenticate('jwt',{session:false,failureRedi
 router.route('/new').post(PostController.createPost);
 
 //upload photo after a post is created, in client this can be a page after post submit
-router.route('/new/uploadPhoto/:postid').post(isOwnerOfPost,PostController.uploadPhoto);
+//router.route('/new/upload/:postid').post(isOwnerOfPost,PostController.upload);
 // TODO- photo table - id, userid, postid, photo(10 columns for future? but limiting 5 from client), createdAt, updatedAt
 
 //Method - using AWS s3, first client request to this route then server request to S3 for token then get response from s3 and response token
@@ -20,6 +20,10 @@ router.route('/new/uploadPhoto/:postid').post(isOwnerOfPost,PostController.uploa
 //in client image needs to be resized and named according to their postId then send it to server to save image url to database
 //TODO - resizing, reducing quality, and renaming of original image
 //TODO - thumbnail generation from client? then upload directly to s3? Or use aws lambda to create thumbnail(this may cause extra cost) 
+
+
+router.route('/new/upload/:postid').post(PostController.upload);
+
 
 //detail page of a post
 router.route('/search/detail/:postid').get(PostController.readDetailPost);
@@ -33,6 +37,7 @@ router.route('/:postid').put(isOwnerOfPost,PostController.updatePost);//TODO - p
 //delete
 router.route('/:postid').delete(isOwnerOfPost,PostController.deletePost);//TODO - handle photo deletion also
 
+
 //testing purpose
 router.route('/all').get(PostController.all);
 
@@ -43,3 +48,10 @@ module.exports = router;
 // list of rooms - pagination
 // sorting, searching
 // detail page
+
+
+//image
+
+//https://www.npmjs.com/package/jimp
+
+//crop from client

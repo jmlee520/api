@@ -1,12 +1,11 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var comment = sequelize.define('comment', {
-    userId: DataTypes.INTEGER,
-    postId: DataTypes.INTEGER,
-    messageId:DataTypes.INTEGER,
-    comment: DataTypes.TEXT,
-    report: DataTypes.INTEGER,
-    likes: DataTypes.INTEGER
+    userId: DataTypes.UUID,
+    postId: DataTypes.UUID,
+    messageId:DataTypes.UUID,
+    businessId:DataTypes.UUID,
+    comment: DataTypes.TEXT
   });
 
   comment.associate = function (models) {

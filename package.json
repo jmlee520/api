@@ -4,7 +4,7 @@
   "description": "express sequelize postgresql nodejs",
   "main": "app.js",
   "scripts": {
-    "start":"nodemon app.js",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "simplopers",
@@ -13,12 +13,16 @@
     "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "formidable": "^1.1.1",
+    "jimp": "^0.2.28",
     "jsonwebtoken": "^7.4.3",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.0",
     "passport-local": "^1.0.0",
     "pg": "^7.2.0",
     "pg-hstore": "^2.3.2",
+    "redis": "^2.8.0",
+    "s3-image-uploader": "^1.0.7",
     "sequelize": "^4.7.5"
   },
   "devDependencies": {

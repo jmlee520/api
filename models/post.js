@@ -1,52 +1,54 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var post = sequelize.define('post', {
-    userId: DataTypes.INTEGER,
-    businessId: DataTypes.INTEGER,
+    userId: DataTypes.UUID,
+    businessId: DataTypes.UUID,
     region: DataTypes.STRING,
-    availability: DataTypes.BOOLEAN,
-    available_from: DataTypes.DATEONLY,
-    available_to: DataTypes.DATEONLY,
     desc: DataTypes.TEXT,
-    property_type: DataTypes.STRING,
-    room_type: DataTypes.STRING,
+    propertyType: DataTypes.STRING,
+    roomType: DataTypes.STRING,
     for: DataTypes.STRING,
-    address_1: DataTypes.STRING,
-    address_2: DataTypes.STRING,
+    addressOne: DataTypes.STRING,
+    addressTwo: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    zipcode: DataTypes.STRING,
+    zipCode: DataTypes.STRING,
     country: DataTypes.STRING,
     deposit: DataTypes.STRING,
     price: DataTypes.STRING,
+    leasePerMonth: DataTypes.STRING,
+    leasePerDay: DataTypes.STRING,
     gender: DataTypes.STRING,
     edu: DataTypes.TEXT,
-    floor_level: DataTypes.STRING,
+    floorLevel: DataTypes.STRING,
     utility: DataTypes.STRING,
-    internet: DataTypes.STRING,
     furnished: DataTypes.STRING,
     bathroom: DataTypes.STRING,
     trans: DataTypes.STRING,
-    lease_type: DataTypes.STRING,
-    property_area: DataTypes.STRING,
-    no_rooms: DataTypes.STRING,
-    no_bathrooms: DataTypes.STRING,
+    leaseType: DataTypes.STRING,
+    propertyArea: DataTypes.STRING,
+    noRooms: DataTypes.STRING,
+    noBathrooms: DataTypes.STRING,
     garage: DataTypes.BOOLEAN,
-    con_smoking: DataTypes.BOOLEAN,
-    con_pet: DataTypes.BOOLEAN,
-    con_cook: DataTypes.BOOLEAN,
-    con_parking: DataTypes.STRING,
-    con_meal: DataTypes.STRING,
+    conSmoking: DataTypes.BOOLEAN,
+    conPet: DataTypes.BOOLEAN,
+    conCook: DataTypes.BOOLEAN,
+    conParking: DataTypes.STRING,
+    conMeal: DataTypes.STRING,
     ac: DataTypes.BOOLEAN,
+    availability: DataTypes.BOOLEAN,
+    availableFrom: DataTypes.DATEONLY,
+    availableTo: DataTypes.DATEONLY,
     rules: DataTypes.TEXT,
-    likes: DataTypes.INTEGER,
-    report: DataTypes.INTEGER,
-    local_services: DataTypes.STRING,
-    local_business: DataTypes.STRING,
-    loca_amenities: DataTypes.STRING,
-    pictures: DataTypes.JSON
+    localServices: DataTypes.STRING,
+    localBusiness: DataTypes.STRING,
+    locaAmenities: DataTypes.STRING,
+    images: DataTypes.ARRAY(DataTypes.STRING)
   });
-
+//TODO - terms and condition privacy policy - value must be html wraped as string
+//secure - we do not sell information, how we use user information
+//term - age restriction
+// 
   post.associate = function (models) {
     post.belongsTo(models.user,{onDelete: 'NOACTION',onUpdate:'CASCADE'});
     post.belongsTo(models.business,{onDelete: 'SETNULL',onUpdate:'CASCADE'});
@@ -57,3 +59,9 @@ module.exports = function(sequelize, DataTypes) {
 
   return post;
 };
+
+//TODO - acl - total views
+
+// post table - add views(field)
+
+//DataTypes.ARRAY(DataTypes.STRING);

@@ -1,3 +1,5 @@
-node_modules
-seeders
-migrations
+node_modules/
+seeders/
+migrations/
+backup/
+note.md

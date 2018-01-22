@@ -1,14 +1,11 @@
 {
   "development": {
-    "username": "isqhxiziwzrxgl",
-    "password": "69a19de17d7e30f1fa518c88ae425333b268dc06d6da8dd8423dec1916e176b1",
-    "database": "dcch20lk6lqgko",
-    "host": "ec2-107-22-167-179.compute-1.amazonaws.com",
+    "username": "api",
+    "password": "qwe][p",
+    "database": "api",
+    "host": "192.168.0.109",
     "dialect": "postgres",
-    "logging": false,
-    "dialectOptions": {
-      "ssl": true
-    }
+    "logging": false
   },
   "test": {
     "username": "root",

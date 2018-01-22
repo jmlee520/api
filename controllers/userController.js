@@ -41,8 +41,8 @@ module.exports = {
             
 
             user.create({
-                
-               
+   
+                username:faker.internet.userName(),
                 email: req.body.email, 
                 password: hash,
                 ip: faker.internet.ip(),
@@ -51,6 +51,8 @@ module.exports = {
                 lastname: faker.name.lastName(),
                 isBusiness:faker.random.boolean(),
                 allowance: faker.random.number(1),
+                isFacebook: faker.random.boolean(),
+                isGmail: faker.random.boolean(),
                 createdAt: new Date().getTime(),
                 updatedAt: new Date().getTime()
             }).then(function (user) {
@@ -76,7 +78,7 @@ module.exports = {
        res.status(200).json({ token });
     },
     signOut: (req, res)=>{
-        res.send('signed out');
+        res.send('signed out');//client
     },
     profile: (req, res) => {
         //TODO - edit - can reset name,email,password, view - posted rooms (my rooms), favorites
@@ -100,6 +102,7 @@ module.exports = {
         //from message then delete, the do same for posts, if business User delete record from business, finaly delete user
         // Do not delete user right away, give some day then delete it. for record purpose, ADD disabled column for this purpose    
     },
+    //testing
     all:(req,res)=>{
         user.findAll().then((users)=>{
             res.status(200).json(users);
@@ -107,3 +110,8 @@ module.exports = {
     }
 
 };
+
+
+//TODO - add username(field) to users table
+
+//smtp - email service - can it be done locally?

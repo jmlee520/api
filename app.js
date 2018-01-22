@@ -6,7 +6,7 @@ const   express     = require('express'),
 
 const   app         = express();
 const   PORT        = env.PORT;
-
+const client = require('./config/redis');
 
 //Development
 const   volleyball  = require('volleyball');//server logger

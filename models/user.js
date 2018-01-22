@@ -1,6 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var user = sequelize.define('user', {
+    username:DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     ip: DataTypes.STRING,
@@ -9,7 +10,8 @@ module.exports = function(sequelize, DataTypes) {
     lastname: DataTypes.STRING,
     isBusiness: DataTypes.BOOLEAN,
     allowance: DataTypes.INTEGER,
-    isAdmin: DataTypes.BOOLEAN,
+    isFacebook: DataTypes.BOOLEAN,
+    isGmail: DataTypes.BOOLEAN
   });
 
   user.associate = function (models) {
