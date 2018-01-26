@@ -104,9 +104,15 @@ module.exports = {
     },
     //testing
     all:(req,res)=>{
+        /*
         user.findAll().then((users)=>{
             res.status(200).json(users);
         })
+        */
+        //res.send('this is your profile');
+        
+        //res.download(__dirname+'/userController.js', 'example.js');
+        //res.json({reqested:'sending'});
     }
 
 };

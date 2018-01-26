@@ -6,7 +6,9 @@ const   express     = require('express'),
 
 const   app         = express();
 const   PORT        = env.PORT;
-const client = require('./config/redis');
+
+//Redis connection
+//const client = require('./config/redis');
 
 //Development
 const   volleyball  = require('volleyball');//server logger
@@ -24,6 +26,8 @@ const   userRouters = require('./routes/userRouters')
 // Middleware
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended: true})); //study more on this
+
+//To serve public folder, only for development purpose
 //app.use(express.static(path.join(__dirname,'public')));
 
 
@@ -31,7 +35,7 @@ app.use(bodyParser.urlencoded({extended: true})); //study more on this
 app.use(volleyball); //delete when production env
 
 
-//Routes
+// Routes
 app.use('/users', userRouters);
 app.use('/posts', postRouters);
 app.use('/comments', commentRouters);

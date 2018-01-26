@@ -1,3 +1,5 @@
+
+/*
 const redis = require('redis');
 const host = '192.168.0.109';
 const port = '6379';
@@ -17,3 +19,6 @@ module.exports = client;
 //likes: [{postId: Integer}]
 //reportComment:[{commentId: Integer}]
 //reportPost: [{postId: Integer}]
+
+
+*/
