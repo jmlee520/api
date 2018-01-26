@@ -3,4 +3,6 @@ seeders/
 migrations/
 backup/
 note.md
-herokuCredential.txt
+config/herokuCredential.txt
+config/config.json
+sequelizeConfig.txt
