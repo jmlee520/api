@@ -6,3 +6,4 @@ note.md
 config/herokuCredential.txt
 config/config.json
 sequelizeConfig.txt
+secret.js
